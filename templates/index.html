@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-box">
+            <h1>Welcome to Student Exam Performance Predictor</h1>
+            <p>Use this tool to predict a student’s math score based on their profile and exam preparation.</p>
+            <a href="{{ url_for('predict_datapoint') }}" class="btn">Start Prediction</a>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Pradyumn Bisht | Built with Python & Flask</p>
+    </footer>
+</body>
+</html>

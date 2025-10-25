@@ -1,0 +1,100 @@
+/* Reset and center body */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f2f2f2;
+}
+
+/* Container for content */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+/* Box for forms or welcome message */
+.form-box, .welcome-box {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Headings */
+.form-box h1, .welcome-box h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+/* Paragraphs */
+.form-box p, .welcome-box p {
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+/* Form groups for labels and inputs */
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Prediction result */
+h2 {
+    margin-top: 1.5rem;
+    color: #333;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: #555;
+    font-size: 0.9rem;
+}
