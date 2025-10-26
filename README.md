@@ -1,6 +1,6 @@
 ## End to End Machine Learning Project
 
-### To after resuming the server(aws ec2 instance), connect to console and enter following commands
+### After resuming the server(aws ec2 instance), connect to console and enter following commands
 
 - `sudo apt-get update -y`
 - `sudo apt-get upgrade -y`
