@@ -26,7 +26,7 @@ ssh -i <your-key.pem> ubuntu@<your-ec2-public-ip>
 
 or
 
-You can use aws console to connect, so that EC2 console opens in browse
+You can use aws console to connect, so that EC2 console opens directly in browser
 
 ### 2. List Docker Images
 
@@ -36,7 +36,7 @@ Get the name of the image available on your instance:
 docker images
 ```
 
-Copy the image name you want to run. ending with suffix **student-performance**
+Copy the image name, most likely ending with suffix **student-performance**
 
 ### 3. Run the Docker Container
 
