@@ -62,7 +62,9 @@ You should see your container listed and running.
 
 Open a browser and go to:
 
-"http://<your-ec2-public-ip>:8080"
+```plaintext
+http://<your-ec2-public-ip>:8080
+```
 
 You should see your application running.
 
