@@ -113,25 +113,38 @@ http://localhost:8080
 
 ## Deploy on AWS EC2 (Full Workflow)
 
-1) SSH into EC2  
+1) SSH into EC2
+   
+```bash
 ssh -i <your-key.pem> ubuntu@<your-ec2-public-ip>
+```
 
 
-2) List Docker images  
+2) List Docker images
+```bash
 docker images
+```
 
-3) Run container  
+3) Run container
+```bash
 docker run -d -p 8080:8080 <docker-image-name>
+```
 
-4) Confirm the container is running  
+4) Confirm the container is running
+```bash
 docker ps
+```
 
-5) Access application from browser  
+5) Access application from browser
+```bash
 http://<your-ec2-public-ip>:8080
+```
 
-6) Stop / restart container  
+6) Stop / restart container
+```bash
 docker stop <container-name>  
 docker start <container-name>
+```
 
 IMPORTANT  
 Ensure port 8080 is open in EC2 security group.
