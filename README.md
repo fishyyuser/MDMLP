@@ -1,93 +1,193 @@
-# End-to-End Machine Learning Project
+# End-to-End Machine Learning Deployment — Lightweight, Containerized, Production-Ready ML Service
 
-This project demonstrates an end-to-end machine learning workflow deployed via Docker on AWS EC2.
+This project demonstrates how to convert a trained machine learning model into a fully deployable inference service using Docker and AWS EC2, optimized for low-resource cloud environments.
 
----
+Unlike typical ML repositories that mix training and inference together, MDMLP (Minimum Deployable Machine Learning Project) intentionally separates them:
 
-## Prerequisites
+- Training happens offline (local / Colab / GPU)
+- Only artifacts are deployed (preprocessor + model pickle)
+- The Docker image contains inference-only dependencies
+- This keeps the container small, fast, and cloud-efficient
 
-- AWS EC2 instance (t3.micro recommended for free tier)
-- Docker installed on the instance
-- The Docker image pushed to AWS ECR (or available locally)
+This is the same deployment philosophy used in real-world ML production systems.
 
----
+------------------------------------------------------------
 
-## Workflow After Resuming the Server
+## Problem Statement
 
-After you start your AWS EC2 instance, follow these steps:
+The model predicts student performance (final math score) from demographic and academic features such as:
 
-### 1. Connect to the EC2 Console
+gender  
+race_ethnicity  
+parental_level_of_education  
+lunch  
+test_preparation_course  
+writing_score  
+reading_score
 
-Use SSH to connect to your instance:
+Dataset used:  
+https://www.kaggle.com/datasets/spscientist/students-performance-in-exams
 
-```bash
+------------------------------------------------------------
+
+## Model Selection Summary
+
+Multiple regression models were trained and evaluated. Ridge Regression and Linear Regression scored almost identically, but Linear Regression had a smaller model size and faster inference time.
+
+Final deployed model: Linear Regression  
+Reason: Similar accuracy to Ridge Regression, but smaller storage size and more efficient inference.
+
+Top test-set performance scores:
+
+Linear Regression — R2: 0.8803  
+Ridge Regression — R2: 0.8806  
+CatBoost — R2: 0.8516  
+AdaBoost — R2: 0.8488  
+Random Forest — R2: 0.8473  
+XGBoost — R2: 0.8278  
+Lasso — R2: 0.8253  
+KNN — R2: 0.7838  
+Decision Tree — R2: 0.7206
+
+------------------------------------------------------------
+
+## API Inputs
+
+The app accepts 7 user inputs (numeric or dropdown fields):
+
+gender  
+race_ethnicity  
+parental_level_of_education  
+lunch  
+test_preparation_course  
+writing_score  
+reading_score
+
+The output is a predicted math score.
+
+------------------------------------------------------------
+
+## Architecture (Training → Artifacts → Deployment)
+
+Training happens offline  
+↓  
+Export serialized artifacts (model.pkl + preprocessor.pkl)  
+↓  
+Build Docker image with inference-only environment  
+↓  
+Run container on AWS EC2  
+↓  
+User inputs features via web form  
+↓  
+Model returns score prediction
+
+Key design decisions:
+- Training code is not packaged inside deployment container
+- Only serialized artifacts are included
+- Container stays lightweight and boots quickly even on free-tier EC2
+
+------------------------------------------------------------
+
+## Cost Optimization (AWS Free Tier)
+
+AWS Free Tier has a 720-hour/month limit.  
+To avoid unnecessary billing, the EC2 instance is intentionally shut down when not in use.  
+The container remains intact and can be restarted any time.
+
+This reflects real-world cost-aware ML deployment practices used in startups.
+
+------------------------------------------------------------
+
+## Docker Usage
+
+Build image (optional)
+docker build -t student-performance .
+
+Run container locally
+docker run -d -p 8080:8080 student-performance
+
+Open in browser:
+http://localhost:8080
+
+------------------------------------------------------------
+
+## Deploy on AWS EC2 (Full Workflow)
+
+1) SSH into EC2  
 ssh -i <your-key.pem> ubuntu@<your-ec2-public-ip>
-```
 
-or
 
-You can use aws console to connect, so that EC2 console opens directly in browser
-
-### 2. List Docker Images
-
-Get the name of the image available on your instance:
-
-```bash
+2) List Docker images  
 docker images
-```
 
-Copy the image name, most likely ending with suffix **student-performance**
+3) Run container  
+docker run -d -p 8080:8080 <docker-image-name>
 
-### 3. Run the Docker Container
-
-Run the image in detached mode and map port 8080:
-
-```bash
-docker run -d -p 8080:8080 "<docker-image-name>"
-```
-
-> Replace "<docker-image-name>" with the actual name of your Docker image.
-
-### 4. Check if the Container is Running
-
-```bash
+4) Confirm the container is running  
 docker ps
-```
 
-You should see your container listed and running.
-
----
-
-## Accessing the Application
-
-Open a browser and go to:
-
-```plaintext
+5) Access application from browser  
 http://<your-ec2-public-ip>:8080
-```
 
-You should see your application running.
+6) Stop / restart container  
+docker stop <container-name>  
+docker start <container-name>
 
----
+IMPORTANT  
+Ensure port 8080 is open in EC2 security group.
 
-## Stopping the Container
+------------------------------------------------------------
 
-To stop the container without deleting it:
+## Training Repository Link
 
-```bash
-docker stop "<docker-container-name>"
-```
+This deployment repository intentionally contains inference-only code.
 
-To start it again later:
+The full training pipeline including:
+- model comparisons
+- evaluation metrics
+- hyperparameter tuning
+- artifact generation (model.pkl and preprocessor.pkl)
 
-```bash
-docker start "<docker-container-name>"
-```
+…is available in the companion repository:
 
----
+https://github.com/fishyyuser/ML-Project
 
-## Notes
+MDMLP uses the exported artifacts generated from that repository.
 
-- Make sure the EC2 security group allows inbound TCP traffic on port 8080.
+------------------------------------------------------------
 
----
+## Tech Stack
+
+Python  
+Flask  
+Scikit-Learn  
+Docker  
+AWS EC2  
+HTML / CSS for simple UI
+
+------------------------------------------------------------
+
+## What this project demonstrates (for ML Engineer roles)
+
+- ML model training and evaluation
+- Exporting artifacts for deployment
+- Dockerizing an ML inference service
+- Running ML workloads on resource-limited cloud instances
+- Separation of training vs inference environments
+- Container lifecycle management on EC2
+- Cost-aware deployment workflow
+
+------------------------------------------------------------
+
+## Future Improvements (optional roadmap)
+
+Convert Flask → FastAPI  
+Add request logging + monitoring  
+Add MLflow for artifact versioning  
+Move to CI/CD deployment automation
+
+------------------------------------------------------------
+
+## License
+
+MIT
