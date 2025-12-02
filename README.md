@@ -192,15 +192,6 @@ HTML / CSS for simple UI
 
 ------------------------------------------------------------
 
-## Future Improvements (optional roadmap)
-
-Convert Flask → FastAPI  
-Add request logging + monitoring  
-Add MLflow for artifact versioning  
-Move to CI/CD deployment automation
-
-------------------------------------------------------------
-
 ## License
 
 MIT
