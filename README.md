@@ -11,7 +11,7 @@ Unlike typical ML repositories that mix training and inference together, MDMLP (
 
 This is the same deployment philosophy used in real-world ML production systems.
 
-------------------------------------------------------------
+
 
 ## Problem Statement
 
@@ -28,7 +28,7 @@ reading_score
 Dataset used:  
 https://www.kaggle.com/datasets/spscientist/students-performance-in-exams
 
-------------------------------------------------------------
+
 
 ## Model Selection Summary
 
@@ -49,7 +49,7 @@ Lasso — R2: 0.8253
 KNN — R2: 0.7838  
 Decision Tree — R2: 0.7206
 
-------------------------------------------------------------
+
 
 ## API Inputs
 
@@ -65,7 +65,7 @@ reading_score
 
 The output is a predicted math score.
 
-------------------------------------------------------------
+
 
 ## Architecture (Training → Artifacts → Deployment)
 
@@ -86,7 +86,7 @@ Key design decisions:
 - Only serialized artifacts are included
 - Container stays lightweight and boots quickly even on free-tier EC2
 
-------------------------------------------------------------
+
 
 ## Cost Optimization (AWS Free Tier)
 
@@ -96,7 +96,7 @@ The container remains intact and can be restarted any time.
 
 This reflects real-world cost-aware ML deployment practices used in startups.
 
-------------------------------------------------------------
+
 
 ## Docker Usage
 
@@ -109,7 +109,7 @@ docker run -d -p 8080:8080 student-performance
 Open in browser:
 http://localhost:8080
 
-------------------------------------------------------------
+
 
 ## Deploy on AWS EC2 (Full Workflow)
 
@@ -149,7 +149,7 @@ docker start <container-name>
 IMPORTANT  
 Ensure port 8080 is open in EC2 security group.
 
-------------------------------------------------------------
+
 
 ## Training Repository Link
 
@@ -167,7 +167,7 @@ https://github.com/fishyyuser/ML-Project
 
 MDMLP uses the exported artifacts generated from that repository.
 
-------------------------------------------------------------
+
 
 ## Tech Stack
 
@@ -178,7 +178,7 @@ Docker
 AWS EC2  
 HTML / CSS for simple UI
 
-------------------------------------------------------------
+
 
 ## License
 
