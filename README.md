@@ -180,18 +180,6 @@ HTML / CSS for simple UI
 
 ------------------------------------------------------------
 
-## What this project demonstrates (for ML Engineer roles)
-
-- ML model training and evaluation
-- Exporting artifacts for deployment
-- Dockerizing an ML inference service
-- Running ML workloads on resource-limited cloud instances
-- Separation of training vs inference environments
-- Container lifecycle management on EC2
-- Cost-aware deployment workflow
-
-------------------------------------------------------------
-
 ## License
 
 MIT
