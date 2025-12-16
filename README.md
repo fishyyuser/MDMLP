@@ -101,13 +101,19 @@ This reflects real-world cost-aware ML deployment practices used in startups.
 ## Docker Usage
 
 Build image (optional)
+```bash
 docker build -t student-performance .
+```
 
 Run container locally
+```bash
 docker run -d -p 8080:8080 student-performance
+```
 
 Open in browser:
+```bash
 http://localhost:8080
+```
 
 
 
